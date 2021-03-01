@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Sisa;
+use App\Models\Sisa_pagi;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response;
 
-class SisaController extends Controller
+class SisaPagiController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,10 +17,10 @@ class SisaController extends Controller
      */
     public function index()
     {
-        $sisa = Sisa::get();
+        $sisa_pagi = Sisa_pagi::get();
         $response = [
-            'message' => 'List data sisa',
-            'data' => $sisa
+            'message' => 'List data sisa_pagi',
+            'data' => $sisa_pagi
         ];
         return response()->json($response, Response::HTTP_OK);
     }
@@ -44,10 +44,14 @@ class SisaController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'nilai' => ['required'],
-            'jenis_makanan' => ['required', 'in:Makanan Pokok,Lauk Hewani,Lauk Nabati,Sayur,Buah,Minum,Snack'],
-            'waktu' => ['required', 'in:Pagi,Siang,Malam'],
             'id_pasien' => ['required'],
+            'makanan_pokok' => ['required'],
+            'lauk_hewani' => ['required'],
+            'lauk_nabati' => ['required'],
+            'sayur' => ['required'],
+            'buah' => ['required'],
+            'minum' => ['required'],
+            'snack' => ['required'],
         ]);
 
         if ($validator->fails()) {
@@ -55,10 +59,10 @@ class SisaController extends Controller
         }
 
         try {
-            $sisa = Sisa::create($request->all());
+            $sisa_pagi = Sisa_pagi::create($request->all());
             $response = [
-                'message' => 'Sisa created',
-                'data' => $sisa
+                'message' => 'Sisa_pagi created',
+                'data' => $sisa_pagi
             ];
             return response()->json($response, Response::HTTP_CREATED);
         } catch (QueryException $e) {
@@ -76,10 +80,10 @@ class SisaController extends Controller
      */
     public function show($id)
     {
-        $sisa = Sisa::findOrFail($id);
+        $sisa_pagi = Sisa_pagi::findOrFail($id);
         $response = [
-            'message' => 'Detail data sisa',
-            'data' => $sisa
+            'message' => 'Detail data sisa_pagi',
+            'data' => $sisa_pagi
         ];
         return response()->json($response, Response::HTTP_OK);
     }
@@ -104,12 +108,16 @@ class SisaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $sisa = Sisa::findOrFail($id);
+        $sisa_pagi = Sisa_pagi::findOrFail($id);
         $validator = Validator::make($request->all(), [
-            'nilai' => ['required'],
-            'jenis_makanan' => ['required', 'in:Makanan Pokok,Lauk Hewani,Lauk Nabati,Sayur,Buah,Minum,Snack'],
-            'waktu' => ['required', 'in:Pagi,Siang,Malam'],
             'id_pasien' => ['required'],
+            'makanan_pokok' => ['required'],
+            'lauk_hewani' => ['required'],
+            'lauk_nabati' => ['required'],
+            'sayur' => ['required'],
+            'buah' => ['required'],
+            'minum' => ['required'],
+            'snack' => ['required'],
         ]);
 
         if ($validator->fails()) {
@@ -117,10 +125,10 @@ class SisaController extends Controller
         }
 
         try {
-            $sisa->update($request->all());
+            $sisa_pagi->update($request->all());
             $response = [
-                'message' => 'Sisa updated',
-                'data' => $sisa
+                'message' => 'Sisa_pagi updated',
+                'data' => $sisa_pagi
             ];
             return response()->json($response, Response::HTTP_OK);
         } catch (QueryException $e) {
@@ -138,11 +146,11 @@ class SisaController extends Controller
      */
     public function destroy($id)
     {
-        $sisa = Sisa::findOrFail($id);
+        $sisa_pagi = Sisa_pagi::findOrFail($id);
         try {
-            $sisa->delete();
+            $sisa_pagi->delete();
             $response = [
-                'message' => 'Sisa deleted',
+                'message' => 'Sisa_pagi deleted',
             ];
             return response()->json($response, Response::HTTP_OK);
         } catch (QueryException $e) {

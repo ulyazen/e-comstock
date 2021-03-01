@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSisasTable extends Migration
+class CreateSisaSiangsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,16 @@ class CreateSisasTable extends Migration
      */
     public function up()
     {
-        Schema::create('sisas', function (Blueprint $table) {
+        Schema::create('sisa_siangs', function (Blueprint $table) {
             $table->id();
-            $table->tinyInteger('nilai');
-            $table->enum('jenis_makanan', ['Makanan Pokok', 'Lauk Hewani', 'Lauk Nabati', 'Sayur', 'Buah', 'Minum', 'Snack']);
-            $table->enum('waktu', ['Pagi', 'Siang', 'Malam']);
             $table->foreignId('id_pasien')->constrained('pasiens');
+            $table->tinyInteger('makanan_pokok');
+            $table->tinyInteger('lauk_hewani');
+            $table->tinyInteger('lauk_nabati');
+            $table->tinyInteger('sayur');
+            $table->tinyInteger('buah');
+            $table->tinyInteger('minum');
+            $table->tinyInteger('snack');
             $table->timestamps();
         });
     }
@@ -30,6 +34,6 @@ class CreateSisasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sisas');
+        Schema::dropIfExists('sisa_siangs');
     }
 }

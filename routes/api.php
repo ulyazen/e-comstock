@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\BangsalController;
 use App\Http\Controllers\PasienController;
-use App\Http\Controllers\SisaController;
+use App\Http\Controllers\SisaPagiController;
+use App\Http\Controllers\SisaSiangController;
+use App\Http\Controllers\SisaMalamController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -33,8 +35,20 @@ Route::post('/pasien', [PasienController::class, 'store']);
 Route::put('/pasien/{id}', [PasienController::class, 'update']);
 Route::delete('/pasien/{id}', [PasienController::class, 'destroy']);
 
-Route::get('/sisa', [SisaController::class, 'index']);
-Route::get('/sisa/{id}', [SisaController::class, 'show']);
-Route::post('/sisa', [SisaController::class, 'store']);
-Route::put('/sisa/{id}', [SisaController::class, 'update']);
-Route::delete('/sisa/{id}', [SisaController::class, 'destroy']);
+Route::get('/sisa/pagi', [SisaPagiController::class, 'index']);
+Route::get('/sisa/pagi/{id}', [SisaPagiController::class, 'show']);
+Route::post('/sisa/pagi', [SisaPagiController::class, 'store']);
+Route::put('/sisa/pagi/{id}', [SisaPagiController::class, 'update']);
+Route::delete('/sisa/pagi/{id}', [SisaPagiController::class, 'destroy']);
+
+Route::get('/sisa/siang', [SisaSiangController::class, 'index']);
+Route::get('/sisa/siang/{id}', [SisaSiangController::class, 'show']);
+Route::post('/sisa/siang', [SisaSiangController::class, 'store']);
+Route::put('/sisa/siang/{id}', [SisaSiangController::class, 'update']);
+Route::delete('/sisa/siang/{id}', [SisaSiangController::class, 'destroy']);
+
+Route::get('/sisa/malam', [SisaMalamController::class, 'index']);
+Route::get('/sisa/malam/{id}', [SisaMalamController::class, 'show']);
+Route::post('/sisa/malam', [SisaMalamController::class, 'store']);
+Route::put('/sisa/malam/{id}', [SisaMalamController::class, 'update']);
+Route::delete('/sisa/malam/{id}', [SisaMalamController::class, 'destroy']);

@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Bangsal;
+use App\Models\Sisa_malam;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response;
 
-class BangsalController extends Controller
+class SisaMalamController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,10 +17,10 @@ class BangsalController extends Controller
      */
     public function index()
     {
-        $bangsal = Bangsal::orderBy('tanggal', 'DESC')->get();
+        $sisa_malam = Sisa_malam::get();
         $response = [
-            'message' => 'List bangsal order by tanggal',
-            'data' => $bangsal
+            'message' => 'List data sisa_malam',
+            'data' => $sisa_malam
         ];
         return response()->json($response, Response::HTTP_OK);
     }
@@ -44,9 +44,14 @@ class BangsalController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'nama' => ['required'],
-            'siklus' => ['required', 'in:1,2,3,4,5,6,7'],
-            'tanggal' => ['required']
+            'id_pasien' => ['required'],
+            'makanan_pokok' => ['required'],
+            'lauk_hewani' => ['required'],
+            'lauk_nabati' => ['required'],
+            'sayur' => ['required'],
+            'buah' => ['required'],
+            'minum' => ['required'],
+            'snack' => ['required'],
         ]);
 
         if ($validator->fails()) {
@@ -54,10 +59,10 @@ class BangsalController extends Controller
         }
 
         try {
-            $bangsal = Bangsal::create($request->all());
+            $sisa_malam = Sisa_malam::create($request->all());
             $response = [
-                'message' => 'Bangsal created',
-                'data' => $bangsal
+                'message' => 'Sisa_malam created',
+                'data' => $sisa_malam
             ];
             return response()->json($response, Response::HTTP_CREATED);
         } catch (QueryException $e) {
@@ -75,10 +80,10 @@ class BangsalController extends Controller
      */
     public function show($id)
     {
-        $bangsal = Bangsal::findOrFail($id);
+        $sisa_malam = Sisa_malam::findOrFail($id);
         $response = [
-            'message' => 'Detail data bangsal',
-            'data' => $bangsal
+            'message' => 'Detail data sisa_malam',
+            'data' => $sisa_malam
         ];
         return response()->json($response, Response::HTTP_OK);
     }
@@ -103,11 +108,16 @@ class BangsalController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $bangsal = Bangsal::findOrFail($id);
+        $sisa_malam = Sisa_malam::findOrFail($id);
         $validator = Validator::make($request->all(), [
-            'nama' => ['required'],
-            'siklus' => ['required'],
-            'tanggal' => ['required']
+            'id_pasien' => ['required'],
+            'makanan_pokok' => ['required'],
+            'lauk_hewani' => ['required'],
+            'lauk_nabati' => ['required'],
+            'sayur' => ['required'],
+            'buah' => ['required'],
+            'minum' => ['required'],
+            'snack' => ['required'],
         ]);
 
         if ($validator->fails()) {
@@ -115,10 +125,10 @@ class BangsalController extends Controller
         }
 
         try {
-            $bangsal->update($request->all());
+            $sisa_malam->update($request->all());
             $response = [
-                'message' => 'Bangsal updated',
-                'data' => $bangsal
+                'message' => 'Sisa_malam updated',
+                'data' => $sisa_malam
             ];
             return response()->json($response, Response::HTTP_OK);
         } catch (QueryException $e) {
@@ -136,11 +146,11 @@ class BangsalController extends Controller
      */
     public function destroy($id)
     {
-        $bangsal = Bangsal::findOrFail($id);
+        $sisa_malam = Sisa_malam::findOrFail($id);
         try {
-            $bangsal->delete();
+            $sisa_malam->delete();
             $response = [
-                'message' => 'Bangsal deleted',
+                'message' => 'Sisa_malam deleted',
             ];
             return response()->json($response, Response::HTTP_OK);
         } catch (QueryException $e) {

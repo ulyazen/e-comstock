@@ -16,7 +16,7 @@ class CreateBangsalsTable extends Migration
         Schema::create('bangsals', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->char('siklus', 2);
+            $table->enum('siklus', ['1', '2', '3', '4', '5', '6', '7']);
             $table->date('tanggal');
             $table->timestamps();
         });
