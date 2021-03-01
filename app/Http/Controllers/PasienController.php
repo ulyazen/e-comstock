@@ -7,6 +7,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\DB;
 
 
 class PasienController extends Controller
@@ -76,6 +77,17 @@ class PasienController extends Controller
     public function show($id)
     {
         $pasien = Pasien::findOrFail($id);
+        $response = [
+            'message' => 'Detail data pasien',
+            'data' => $pasien
+        ];
+        return response()->json($response, Response::HTTP_OK);
+    }
+    public function showBangsal($id_bangsal)
+    {
+        $pasien = DB::table('pasiens')
+            ->where('id_bangsal', '=', $id_bangsal)
+            ->get();
         $response = [
             'message' => 'Detail data pasien',
             'data' => $pasien

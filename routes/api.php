@@ -31,6 +31,7 @@ Route::delete('/bangsal/{id}', [BangsalController::class, 'destroy']);
 
 Route::get('/pasien', [PasienController::class, 'index']);
 Route::get('/pasien/{id}', [PasienController::class, 'show']);
+Route::get('/pasienBangsal/{id_bangsal}', [PasienController::class, 'showBangsal']);
 Route::post('/pasien', [PasienController::class, 'store']);
 Route::put('/pasien/{id}', [PasienController::class, 'update']);
 Route::delete('/pasien/{id}', [PasienController::class, 'destroy']);
