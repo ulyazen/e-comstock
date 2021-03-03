@@ -7,6 +7,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\DB;
 
 class SisaPagiController extends Controller
 {
@@ -44,7 +45,7 @@ class SisaPagiController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'id_pasien' => ['required'],
+            'id_pasien' => ['required', 'unique'],
             'makanan_pokok' => ['required'],
             'lauk_hewani' => ['required'],
             'lauk_nabati' => ['required'],
@@ -84,6 +85,17 @@ class SisaPagiController extends Controller
         $response = [
             'message' => 'Detail data sisa_pagi',
             'data' => $sisa_pagi
+        ];
+        return response()->json($response, Response::HTTP_OK);
+    }
+    public function showPagi($id_pasien)
+    {
+        $pasien = DB::table('sisa_pagis')
+            ->where('id_pasien', '=', $id_pasien)
+            ->get();
+        $response = [
+            'message' => 'Detail data pasien pagi',
+            'data' => $pasien
         ];
         return response()->json($response, Response::HTTP_OK);
     }

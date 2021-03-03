@@ -7,6 +7,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\DB;
 
 class SisaSiangController extends Controller
 {
@@ -44,7 +45,7 @@ class SisaSiangController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'id_pasien' => ['required'],
+            'id_pasien' => ['required', 'unique'],
             'makanan_pokok' => ['required'],
             'lauk_hewani' => ['required'],
             'lauk_nabati' => ['required'],
@@ -84,6 +85,17 @@ class SisaSiangController extends Controller
         $response = [
             'message' => 'Detail data sisa_siang',
             'data' => $sisa_siang
+        ];
+        return response()->json($response, Response::HTTP_OK);
+    }
+    public function showSiang($id_pasien)
+    {
+        $pasien = DB::table('sisa_saings')
+            ->where('id_pasien', '=', $id_pasien)
+            ->get();
+        $response = [
+            'message' => 'Detail data pasien siang',
+            'data' => $pasien
         ];
         return response()->json($response, Response::HTTP_OK);
     }

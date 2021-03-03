@@ -7,6 +7,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\DB;
 
 class SisaMalamController extends Controller
 {
@@ -87,7 +88,17 @@ class SisaMalamController extends Controller
         ];
         return response()->json($response, Response::HTTP_OK);
     }
-
+    public function showMalam($id_pasien)
+    {
+        $pasien = DB::table('sisa_malams')
+            ->where('id_pasien', '=', $id_pasien)
+            ->get();
+        $response = [
+            'message' => 'Detail data pasien malam',
+            'data' => $pasien
+        ];
+        return response()->json($response, Response::HTTP_OK);
+    }
     /**
      * Show the form for editing the specified resource.
      *
@@ -110,7 +121,7 @@ class SisaMalamController extends Controller
     {
         $sisa_malam = Sisa_malam::findOrFail($id);
         $validator = Validator::make($request->all(), [
-            'id_pasien' => ['required'],
+            'id_pasien' => ['required', 'unique'],
             'makanan_pokok' => ['required'],
             'lauk_hewani' => ['required'],
             'lauk_nabati' => ['required'],
