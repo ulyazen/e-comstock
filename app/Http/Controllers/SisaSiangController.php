@@ -90,7 +90,7 @@ class SisaSiangController extends Controller
     }
     public function showSiang($id_pasien)
     {
-        $pasien = DB::table('sisa_saings')
+        $pasien = DB::table('sisa_siangs')
             ->where('id_pasien', '=', $id_pasien)
             ->get();
         $response = [
