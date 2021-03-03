@@ -45,7 +45,7 @@ Route::delete('/sisa/pagi/{id}', [SisaPagiController::class, 'destroy']);
 
 Route::get('/sisa/siang', [SisaSiangController::class, 'index']);
 Route::get('/sisa/siang/{id}', [SisaSiangController::class, 'show']);
-Route::get('/sisa/pasienSiang/{id_pasien}', [SisaMalamController::class, 'showSiang']);
+Route::get('/sisa/pasienSiang/{id_pasien}', [SisaSiangController::class, 'showSiang']);
 Route::post('/sisa/siang', [SisaSiangController::class, 'store']);
 Route::put('/sisa/siang/{id}', [SisaSiangController::class, 'update']);
 Route::delete('/sisa/siang/{id}', [SisaSiangController::class, 'destroy']);
