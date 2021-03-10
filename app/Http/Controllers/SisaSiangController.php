@@ -46,13 +46,6 @@ class SisaSiangController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'id_pasien' => ['required'],
-            'makanan_pokok' => ['required'],
-            'lauk_hewani' => ['required'],
-            'lauk_nabati' => ['required'],
-            'sayur' => ['required'],
-            'buah' => ['required'],
-            'minum' => ['required'],
-            'snack' => ['required'],
         ]);
 
         if ($validator->fails()) {
@@ -123,13 +116,7 @@ class SisaSiangController extends Controller
         $sisa_siang = Sisa_siang::findOrFail($id);
         $validator = Validator::make($request->all(), [
             'id_pasien' => ['required'],
-            'makanan_pokok' => ['required'],
-            'lauk_hewani' => ['required'],
-            'lauk_nabati' => ['required'],
-            'sayur' => ['required'],
-            'buah' => ['required'],
-            'minum' => ['required'],
-            'snack' => ['required'],
+
         ]);
 
         if ($validator->fails()) {

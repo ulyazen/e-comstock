@@ -26,6 +26,7 @@ class SisaPagiController extends Controller
         return response()->json($response, Response::HTTP_OK);
     }
 
+
     /**
      * Show the form for creating a new resource.
      *
@@ -46,13 +47,6 @@ class SisaPagiController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'id_pasien' => ['required'],
-            'makanan_pokok' => ['required'],
-            'lauk_hewani' => ['required'],
-            'lauk_nabati' => ['required'],
-            'sayur' => ['required'],
-            'buah' => ['required'],
-            'minum' => ['required'],
-            'snack' => ['required'],
         ]);
 
         if ($validator->fails()) {
@@ -123,13 +117,7 @@ class SisaPagiController extends Controller
         $sisa_pagi = Sisa_pagi::findOrFail($id);
         $validator = Validator::make($request->all(), [
             'id_pasien' => ['required'],
-            'makanan_pokok' => ['required'],
-            'lauk_hewani' => ['required'],
-            'lauk_nabati' => ['required'],
-            'sayur' => ['required'],
-            'buah' => ['required'],
-            'minum' => ['required'],
-            'snack' => ['required'],
+
         ]);
 
         if ($validator->fails()) {

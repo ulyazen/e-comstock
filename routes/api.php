@@ -24,6 +24,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/bangsal', [BangsalController::class, 'index']);
+Route::get('/bangsalDataTable', [BangsalController::class, 'getDataTable']);
 Route::get('/bangsal/{id}', [BangsalController::class, 'show']);
 Route::post('/bangsal', [BangsalController::class, 'store']);
 Route::put('/bangsal/{id}', [BangsalController::class, 'update']);

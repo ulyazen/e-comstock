@@ -7,6 +7,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response;
+use Yajra\DataTables\Facades\DataTables;
 
 class BangsalController extends Controller
 {
@@ -23,6 +24,12 @@ class BangsalController extends Controller
             'data' => $bangsal
         ];
         return response()->json($response, Response::HTTP_OK);
+    }
+
+    public function getDataTable()
+    {
+        $data = Bangsal::orderBy('created_at', 'DESC')->get();
+        return Datatables::of($data)->make(true);
     }
 
     /**
@@ -45,7 +52,7 @@ class BangsalController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'nama' => ['required'],
-            'siklus' => ['required', 'in:1,2,3,4,5,6,7'],
+            'siklus' => ['required', 'in:1,2,3,4,5,6,7,8,9,10,11'],
             'tanggal' => ['required']
         ]);
 

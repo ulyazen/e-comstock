@@ -16,13 +16,12 @@ class CreateSisaSiangsTable extends Migration
         Schema::create('sisa_siangs', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_pasien')->constrained('pasiens');
-            $table->tinyInteger('makanan_pokok');
-            $table->tinyInteger('lauk_hewani');
-            $table->tinyInteger('lauk_nabati');
-            $table->tinyInteger('sayur');
-            $table->tinyInteger('buah');
-            $table->tinyInteger('minum');
-            $table->tinyInteger('snack');
+            $table->tinyInteger('makanan_pokok')->nullable();;
+            $table->tinyInteger('lauk_hewani')->nullable();;
+            $table->tinyInteger('lauk_nabati')->nullable();;
+            $table->tinyInteger('sayur')->nullable();;
+            $table->tinyInteger('buah')->nullable();;
+            $table->tinyInteger('snack')->nullable();;
             $table->timestamps();
         });
     }

@@ -21,7 +21,6 @@ class CreateSisaMalamsTable extends Migration
             $table->tinyInteger('lauk_nabati')->nullable();;
             $table->tinyInteger('sayur')->nullable();;
             $table->tinyInteger('buah')->nullable();;
-            $table->tinyInteger('minum')->nullable();;
             $table->tinyInteger('snack')->nullable();;
             $table->timestamps();
         });
