@@ -34,6 +34,7 @@ Route::get('/pasien', [PasienController::class, 'index']);
 Route::get('/pasien/{id}', [PasienController::class, 'show']);
 Route::get('/pasienAvgSisa', [PasienController::class, 'avgSisa']);
 Route::get('/pasienAvgSisaMakanan', [PasienController::class, 'avgSisaMakanan']);
+Route::get('/pasienAvgLengkap', [PasienController::class, 'avgLengkap']);
 Route::get('/pasienBangsal/{id_bangsal}', [PasienController::class, 'showBangsal']);
 Route::post('/pasien', [PasienController::class, 'store']);
 Route::put('/pasien/{id}', [PasienController::class, 'update']);
