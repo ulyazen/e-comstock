@@ -136,10 +136,6 @@ class PasienController extends Controller
         return response()->json($response, Response::HTTP_OK);
     }
 
-
-
-
-
     public function showBangsal($id_bangsal)
     {
         $pasien = DB::table('pasiens')
