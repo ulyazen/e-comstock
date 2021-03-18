@@ -91,7 +91,7 @@ class PasienController extends Controller
             ->Join('sisa_siangs', 'pasiens.id', '=', 'sisa_siangs.id_pasien')
             ->Join('sisa_malams', 'pasiens.id', '=', 'sisa_malams.id_pasien')
             ->Join('bangsals', 'bangsals.id', '=', 'pasiens.id_bangsal')
-            ->select('bangsals.siklus', DB::raw('(((avg(sisa_pagis.makanan_pokok)+avg(sisa_siangs.makanan_pokok)+avg(sisa_siangs.makanan_pokok))/3)+((avg(sisa_pagis.lauk_hewani)+avg(sisa_siangs.lauk_hewani)+avg(sisa_siangs.lauk_hewani))/3)+((avg(sisa_pagis.lauk_nabati)+avg(sisa_siangs.lauk_nabati)+avg(sisa_siangs.lauk_nabati))/3)+((avg(sisa_pagis.sayur)+avg(sisa_siangs.sayur)+avg(sisa_siangs.sayur))/3)+((avg(sisa_pagis.buah)+avg(sisa_siangs.buah)+avg(sisa_siangs.buah))/3)+((avg(sisa_pagis.snack)+avg(sisa_siangs.snack)+avg(sisa_siangs.snack))/3))/6 as ratarata'))
+            ->select('bangsals.siklus', DB::raw('(((avg(sisa_pagis.makanan_pokok)+avg(sisa_siangs.makanan_pokok)+avg(sisa_malams.makanan_pokok))/3)+((avg(sisa_pagis.lauk_hewani)+avg(sisa_siangs.lauk_hewani)+avg(sisa_malams.lauk_hewani))/3)+((avg(sisa_pagis.lauk_nabati)+avg(sisa_siangs.lauk_nabati)+avg(sisa_malams.lauk_nabati))/3)+((avg(sisa_pagis.sayur)+avg(sisa_siangs.sayur)+avg(sisa_malams.sayur))/3)+((avg(sisa_pagis.buah)+avg(sisa_siangs.buah)+avg(sisa_malams.buah))/3)+((avg(sisa_pagis.snack)+avg(sisa_siangs.snack)+avg(sisa_malams.snack))/3))/6 as ratarata'))
             ->orderBy('bangsals.siklus', 'ASC')
             ->groupBy('bangsals.siklus')
             ->get();
