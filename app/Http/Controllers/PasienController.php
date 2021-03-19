@@ -136,6 +136,58 @@ class PasienController extends Controller
         return response()->json($response, Response::HTTP_OK);
     }
 
+    public function avgSisaBangsal($id_bangsal)
+    {
+        $pasien = DB::table('sisa_pagis')
+            ->Join('pasiens', 'pasiens.id', '=', 'sisa_pagis.id_pasien')
+            ->Join('sisa_siangs', 'pasiens.id', '=', 'sisa_siangs.id_pasien')
+            ->Join('sisa_malams', 'pasiens.id', '=', 'sisa_malams.id_pasien')
+            ->Join('bangsals', 'bangsals.id', '=', 'pasiens.id_bangsal')
+            ->select('bangsals.siklus', DB::raw('(((avg(sisa_pagis.makanan_pokok)+avg(sisa_siangs.makanan_pokok)+avg(sisa_malams.makanan_pokok))/3)+((avg(sisa_pagis.lauk_hewani)+avg(sisa_siangs.lauk_hewani)+avg(sisa_malams.lauk_hewani))/3)+((avg(sisa_pagis.lauk_nabati)+avg(sisa_siangs.lauk_nabati)+avg(sisa_malams.lauk_nabati))/3)+((avg(sisa_pagis.sayur)+avg(sisa_siangs.sayur)+avg(sisa_malams.sayur))/3)+((avg(sisa_pagis.buah)+avg(sisa_siangs.buah)+avg(sisa_malams.buah))/3)+((avg(sisa_pagis.snack)+avg(sisa_siangs.snack)+avg(sisa_malams.snack))/3))/6 as ratarata'))
+            ->where('bangsals.id', '=', $id_bangsal)
+            ->groupBy('bangsals.id')
+            ->get();
+        $response = [
+            'message' => 'Rata-rata sisa makanan keseluruhan bangsal',
+            'data' => $pasien
+        ];
+        return response()->json($response, Response::HTTP_OK);
+    }
+    public function avgSisaMakananBangsal($id_bangsal)
+    {
+        $pasien = DB::table('sisa_pagis')
+            ->Join('pasiens', 'pasiens.id', '=', 'sisa_pagis.id_pasien')
+            ->Join('sisa_siangs', 'pasiens.id', '=', 'sisa_siangs.id_pasien')
+            ->Join('sisa_malams', 'pasiens.id', '=', 'sisa_malams.id_pasien')
+            ->Join('bangsals', 'bangsals.id', '=', 'pasiens.id_bangsal')
+            ->select('bangsals.siklus', DB::raw('(avg(sisa_pagis.makanan_pokok)+avg(sisa_siangs.makanan_pokok)+avg(sisa_malams.makanan_pokok))/3 as makanan_pokok, (avg(sisa_pagis.lauk_hewani)+avg(sisa_siangs.lauk_hewani)+avg(sisa_malams.lauk_hewani))/3 as lauk_hewani, (avg(sisa_pagis.lauk_nabati)+avg(sisa_siangs.lauk_nabati)+avg(sisa_malams.lauk_nabati))/3 as lauk_nabati,(avg(sisa_pagis.sayur)+avg(sisa_siangs.sayur)+avg(sisa_malams.sayur))/3 as sayur,(avg(sisa_pagis.buah)+avg(sisa_siangs.buah)+avg(sisa_malams.buah))/3 as buah,(avg(sisa_pagis.snack)+avg(sisa_siangs.snack)+avg(sisa_malams.snack))/3 as snack'))
+            ->where('bangsals.id', '=', $id_bangsal)
+            ->groupBy('bangsals.id')
+            ->get();
+        $response = [
+            'message' => 'Rata-rata sisa makanan menurut kelompok makanan keseluruhan bangsal',
+            'data' => $pasien
+        ];
+        return response()->json($response, Response::HTTP_OK);
+    }
+    public function avgLengkapBangsal($id_bangsal)
+    {
+        $pasien = DB::table('sisa_pagis')
+            ->Join('pasiens', 'pasiens.id', '=', 'sisa_pagis.id_pasien')
+            ->Join('sisa_siangs', 'pasiens.id', '=', 'sisa_siangs.id_pasien')
+            ->Join('sisa_malams', 'pasiens.id', '=', 'sisa_malams.id_pasien')
+            ->Join('bangsals', 'bangsals.id', '=', 'pasiens.id_bangsal')
+            ->select(DB::raw('bangsals.id, bangsals.siklus, pasiens.nama, pasiens.no_rekam_medis, (sisa_pagis.makanan_pokok) as makanan_pokok_pagi, (sisa_siangs.makanan_pokok) as makanan_pokok_siang, (sisa_malams.makanan_pokok) as makanan_pokok_malam, (sisa_pagis.lauk_hewani) as lauk_hewani_pagi,(sisa_siangs.lauk_hewani) as lauk_hewani_siang, (sisa_malams.lauk_hewani) as lauk_hewani_malam, (sisa_pagis.lauk_nabati) as lauk_nabati_pagi,(sisa_siangs.lauk_nabati) as lauk_nabati_siang,(sisa_malams.lauk_nabati) as lauk_nabati_malam,(sisa_pagis.sayur) as sayur_pagi,(sisa_siangs.sayur) as sayur_siang,(sisa_malams.sayur) as sayur_malam,(sisa_pagis.buah) as buah_pagi,(sisa_siangs.buah) as buah_siang,(sisa_malams.buah) as buah_malam,(sisa_pagis.snack) as snack_pagi,(sisa_siangs.snack) as snack_siang, (sisa_malams.snack) as snack_malam'))
+            ->where('bangsals.id', '=', $id_bangsal)
+            ->orderBy('pasiens.no_rekam_medis', 'ASC')
+            ->get();
+        $response = [
+            'message' => 'Rata-rata lengkap bangsal',
+            'data' => $pasien
+        ];
+        return response()->json($response, Response::HTTP_OK);
+    }
+
     public function showBangsal($id_bangsal)
     {
         $pasien = DB::table('pasiens')
