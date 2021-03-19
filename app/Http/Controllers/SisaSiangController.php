@@ -45,7 +45,7 @@ class SisaSiangController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'id_pasien' => ['required'],
+            'id_pasien' =>  ['required', 'unique:sisa_siangs'],
         ]);
 
         if ($validator->fails()) {
