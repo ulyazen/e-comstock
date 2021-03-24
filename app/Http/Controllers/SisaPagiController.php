@@ -18,7 +18,11 @@ class SisaPagiController extends Controller
      */
     public function index()
     {
-        $sisa_pagi = Sisa_pagi::get();
+        $sisa_pagi = DB::table('sisa_pagis')
+        ->Join('pasiens', 'pasiens.id', '=', 'sisa_pagis.id_pasien')
+        ->Join('bangsals', 'bangsals.id', '=', 'pasiens.id_bangsal')
+        ->select('pasiens.nama as nama_pasien', 'pasiens.no_rekam_medis','bangsals.nama as nama_bangsal', 'bangsals.siklus', 'bangsals.tanggal', 'sisa_pagis.makanan_pokok', 'sisa_pagis.lauk_hewani', 'sisa_pagis.lauk_nabati', 'sisa_pagis.sayur', 'sisa_pagis.buah', 'sisa_pagis.snack')
+        ->get();
         $response = [
             'message' => 'List data sisa_pagi',
             'data' => $sisa_pagi
