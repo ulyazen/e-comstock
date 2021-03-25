@@ -22,6 +22,7 @@ class SisaSiangController extends Controller
         ->Join('pasiens', 'pasiens.id', '=', 'sisa_siangs.id_pasien')
         ->Join('bangsals', 'bangsals.id', '=', 'pasiens.id_bangsal')
         ->select('sisa_siangs.id', 'pasiens.nama as nama_pasien', 'pasiens.no_rekam_medis','bangsals.nama as nama_bangsal', 'bangsals.siklus', 'bangsals.tanggal', 'sisa_siangs.makanan_pokok', 'sisa_siangs.lauk_hewani', 'sisa_siangs.lauk_nabati', 'sisa_siangs.sayur', 'sisa_siangs.buah', 'sisa_siangs.snack')
+        ->orderBy('sisa_siangs.id', 'ASC')
         ->get();
         $response = [
             'message' => 'List data sisa_siang',
