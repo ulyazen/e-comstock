@@ -25,7 +25,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
  });
 Route::post('/login',[UserController::class, 'index']);
 Route::post('/register',[UserController::class, 'register']);
-Route::delete('/user/{id}', [UserController::class, 'destroy']);
+Route::delete('/userDelete/{id}', [UserController::class, 'destroy']);
 Route::group(['middleware' => 'auth:sanctum'], function() {
     Route::post('/logout', [UserController::class, 'logout']);
     Route::get('/bangsalUser/{id_user}', [BangsalController::class, 'index']);
