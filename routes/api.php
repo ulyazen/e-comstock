@@ -36,9 +36,9 @@ Route::group(['middleware' => 'auth:sanctum'], function() {
 
     Route::get('/pasienUser/{id_user}', [PasienController::class, 'index']);
     Route::get('/pasien/{id}/', [PasienController::class, 'show']);
-    Route::get('/pasienAvgSisa', [PasienController::class, 'avgSisa']);
-    Route::get('/pasienAvgSisaMakanan', [PasienController::class, 'avgSisaMakanan']);
-    Route::get('/pasienAvgLengkap', [PasienController::class, 'avgLengkap']);
+    Route::get('/pasienAvgSisaUser/{id_user}', [PasienController::class, 'avgSisa']);
+    Route::get('/pasienAvgSisaMakananUser/{id_user}', [PasienController::class, 'avgSisaMakanan']);
+    Route::get('/pasienAvgLengkapUser/{id_user}', [PasienController::class, 'avgLengkap']);
     Route::get('/pasienAvgSisa/{id_bangsal}', [PasienController::class, 'avgSisaBangsal']);
     Route::get('/pasienAvgSisaMakanan/{id_bangsal}', [PasienController::class, 'avgSisaMakananBangsal']);
     Route::get('/pasienAvgLengkap/{id_bangsal}', [PasienController::class, 'avgLengkapBangsal']);

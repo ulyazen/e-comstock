@@ -84,7 +84,7 @@ class PasienController extends Controller
         return response()->json($response, Response::HTTP_OK);
     }
 
-    public function avgSisa()
+    public function avgSisa($id_user)
     {
         $pasien = DB::table('sisa_pagis')
             ->Join('pasiens', 'pasiens.id', '=', 'sisa_pagis.id_pasien')
@@ -94,6 +94,7 @@ class PasienController extends Controller
             ->select('bangsals.siklus', DB::raw('(((avg(sisa_pagis.makanan_pokok)+avg(sisa_siangs.makanan_pokok)+avg(sisa_malams.makanan_pokok))/3)+((avg(sisa_pagis.lauk_hewani)+avg(sisa_siangs.lauk_hewani)+avg(sisa_malams.lauk_hewani))/3)+((avg(sisa_pagis.lauk_nabati)+avg(sisa_siangs.lauk_nabati)+avg(sisa_malams.lauk_nabati))/3)+((avg(sisa_pagis.sayur)+avg(sisa_siangs.sayur)+avg(sisa_malams.sayur))/3)+((avg(sisa_pagis.buah)+avg(sisa_siangs.buah)+avg(sisa_malams.buah))/3)+((avg(sisa_pagis.snack)+avg(sisa_siangs.snack)+avg(sisa_malams.snack))/3))/6 as ratarata'))
             ->orderBy('bangsals.siklus', 'ASC')
             ->groupBy('bangsals.siklus')
+            ->where('id_user', '=', $id_user)
             ->get();
         $response = [
             'message' => 'Rata-rata sisa makanan keseluruhan',
@@ -101,7 +102,7 @@ class PasienController extends Controller
         ];
         return response()->json($response, Response::HTTP_OK);
     }
-    public function avgSisaMakanan()
+    public function avgSisaMakanan($id_user)
     {
         $pasien = DB::table('sisa_pagis')
             ->Join('pasiens', 'pasiens.id', '=', 'sisa_pagis.id_pasien')
@@ -111,6 +112,7 @@ class PasienController extends Controller
             ->select('bangsals.siklus', DB::raw('(avg(sisa_pagis.makanan_pokok)+avg(sisa_siangs.makanan_pokok)+avg(sisa_malams.makanan_pokok))/3 as makanan_pokok, (avg(sisa_pagis.lauk_hewani)+avg(sisa_siangs.lauk_hewani)+avg(sisa_malams.lauk_hewani))/3 as lauk_hewani, (avg(sisa_pagis.lauk_nabati)+avg(sisa_siangs.lauk_nabati)+avg(sisa_malams.lauk_nabati))/3 as lauk_nabati,(avg(sisa_pagis.sayur)+avg(sisa_siangs.sayur)+avg(sisa_malams.sayur))/3 as sayur,(avg(sisa_pagis.buah)+avg(sisa_siangs.buah)+avg(sisa_malams.buah))/3 as buah,(avg(sisa_pagis.snack)+avg(sisa_siangs.snack)+avg(sisa_malams.snack))/3 as snack'))
             ->orderBy('bangsals.siklus', 'ASC')
             ->groupBy('bangsals.siklus')
+            ->where('id_user', '=', $id_user)
             ->get();
         $response = [
             'message' => 'Rata-rata sisa makanan menurut kelompok makanan keseluruhan',
@@ -118,7 +120,7 @@ class PasienController extends Controller
         ];
         return response()->json($response, Response::HTTP_OK);
     }
-    public function avgLengkap()
+    public function avgLengkap($id_user)
     {
         $pasien = DB::table('sisa_pagis')
             ->Join('pasiens', 'pasiens.id', '=', 'sisa_pagis.id_pasien')
@@ -128,6 +130,7 @@ class PasienController extends Controller
             ->select(DB::raw('bangsals.siklus, avg(sisa_pagis.makanan_pokok) as makanan_pokok_pagi, avg(sisa_siangs.makanan_pokok) as makanan_pokok_siang, avg(sisa_malams.makanan_pokok) as makanan_pokok_malam, avg(sisa_pagis.lauk_hewani) as lauk_hewani_pagi,avg(sisa_siangs.lauk_hewani) as lauk_hewani_siang, avg(sisa_malams.lauk_hewani) as lauk_hewani_malam, avg(sisa_pagis.lauk_nabati) as lauk_nabati_pagi,avg(sisa_siangs.lauk_nabati) as lauk_nabati_siang,avg(sisa_malams.lauk_nabati) as lauk_nabati_malam,avg(sisa_pagis.sayur) as sayur_pagi,avg(sisa_siangs.sayur) as sayur_siang,avg(sisa_malams.sayur) as sayur_malam,avg(sisa_pagis.buah) as buah_pagi,avg(sisa_siangs.buah) as buah_siang,avg(sisa_malams.buah) as buah_malam,avg(sisa_pagis.snack) as snack_pagi,avg(sisa_siangs.snack) as snack_siang, avg(sisa_malams.snack) as snack_malam,(avg(sisa_pagis.makanan_pokok)+avg(sisa_pagis.lauk_hewani)+avg(sisa_pagis.lauk_nabati)+avg(sisa_pagis.sayur)+avg(sisa_pagis.buah)+avg(sisa_pagis.snack))/6 as ratarata_pagi, (avg(sisa_siangs.makanan_pokok)+avg(sisa_siangs.lauk_hewani)+avg(sisa_siangs.lauk_nabati)+avg(sisa_siangs.sayur)+avg(sisa_siangs.buah)+avg(sisa_siangs.snack))/6 as ratarata_siang,(avg(sisa_malams.makanan_pokok)+avg(sisa_malams.lauk_hewani)+avg(sisa_malams.lauk_nabati)+avg(sisa_malams.sayur)+avg(sisa_malams.buah)+avg(sisa_malams.snack))/6 as ratarata_malam,(((avg(sisa_pagis.makanan_pokok)+avg(sisa_siangs.makanan_pokok)+avg(sisa_malams.makanan_pokok))/3)+((avg(sisa_pagis.lauk_hewani)+avg(sisa_siangs.lauk_hewani)+avg(sisa_malams.lauk_hewani))/3)+((avg(sisa_pagis.lauk_nabati)+avg(sisa_siangs.lauk_nabati)+avg(sisa_malams.lauk_nabati))/3)+((avg(sisa_pagis.sayur)+avg(sisa_siangs.sayur)+avg(sisa_malams.sayur))/3)+((avg(sisa_pagis.buah)+avg(sisa_siangs.buah)+avg(sisa_malams.buah))/3)+((avg(sisa_pagis.snack)+avg(sisa_siangs.snack)+avg(sisa_malams.snack))/3))/6 as ratarata'))
             ->orderBy('bangsals.siklus', 'ASC')
             ->groupBy('bangsals.siklus')
+            ->where('id_user', '=', $id_user)
             ->get();
         $response = [
             'message' => 'Rata-rata lengkap',
