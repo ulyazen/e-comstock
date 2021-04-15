@@ -9,5 +9,5 @@ class Bangsal extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nama', 'siklus', 'tanggal'];
+    protected $fillable = ['nama', 'siklus', 'tanggal', 'id_user'];
 }

@@ -19,6 +19,7 @@ class CreatePasiensTable extends Migration
             $table->foreignId('id_bangsal')->constrained('bangsals');
             $table->string('no_rekam_medis')->nullable();
             $table->timestamps();
+            $table->foreignId('id_user')->constrained('users');
         });
     }
 

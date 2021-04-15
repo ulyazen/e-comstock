@@ -40,11 +40,14 @@ class UserController extends Controller
                 ]);
             }
 
+            $id_user = $user->id;
             $tokenResult = $user->createToken('token-auth')->plainTextToken;
+            
             $respon = [
                 'success'   => true,
                 'message' => 'Berhasil login',
                 'content' => [
+                    'id_user' => $id_user,
                     'status_code' => 200,
                     'access_token' => $tokenResult,
                     'token_type' => 'Bearer',

@@ -16,9 +16,9 @@ class BangsalController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id_user)
     {
-        $bangsal = Bangsal::orderBy('tanggal', 'DESC')->get();
+        $bangsal = Bangsal::orderBy('tanggal', 'DESC')->where('id_user', '=', $id_user)->get();
         $response = [
             'message' => 'List bangsal order by tanggal',
             'data' => $bangsal
@@ -26,9 +26,9 @@ class BangsalController extends Controller
         return response()->json($response, Response::HTTP_OK);
     }
 
-    public function getDataTable()
+    public function getDataTable($id_user)
     {
-        $data = Bangsal::orderBy('created_at', 'DESC')->get();
+        $data = Bangsal::orderBy('created_at', 'DESC')->where('id_user', '=', $id_user)->get();
         return Datatables::of($data)->make(true);
     }
 

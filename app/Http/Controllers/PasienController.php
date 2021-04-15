@@ -17,9 +17,9 @@ class PasienController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id_user)
     {
-        $pasien = Pasien::get();
+        $pasien = Pasien::where('id_user', '=', $id_user)->get();
         $response = [
             'message' => 'List data pasien',
             'data' => $pasien

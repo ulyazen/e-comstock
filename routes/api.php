@@ -27,15 +27,15 @@ Route::post('/login',[UserController::class, 'index']);
 Route::post('/register',[UserController::class, 'register']);
 Route::group(['middleware' => 'auth:sanctum'], function() {
     Route::post('/logout', [UserController::class, 'logout']);
-    Route::get('/bangsal', [BangsalController::class, 'index']);
-    Route::get('/bangsalDataTable', [BangsalController::class, 'getDataTable']);
+    Route::get('/bangsalU/{id_user}', [BangsalController::class, 'index']);
+    Route::get('/bangsalDataTable/{id_user}', [BangsalController::class, 'getDataTable']);
     Route::get('/bangsal/{id}', [BangsalController::class, 'show']);
     Route::post('/bangsal', [BangsalController::class, 'store']);
     Route::put('/bangsal/{id}', [BangsalController::class, 'update']);
     Route::delete('/bangsal/{id}', [BangsalController::class, 'destroy']);
 
-    Route::get('/pasien', [PasienController::class, 'index']);
-    Route::get('/pasien/{id}', [PasienController::class, 'show']);
+    Route::get('/pasienU/{id_user}', [PasienController::class, 'index']);
+    Route::get('/pasien/{id}/', [PasienController::class, 'show']);
     Route::get('/pasienAvgSisa', [PasienController::class, 'avgSisa']);
     Route::get('/pasienAvgSisaMakanan', [PasienController::class, 'avgSisaMakanan']);
     Route::get('/pasienAvgLengkap', [PasienController::class, 'avgLengkap']);
@@ -47,21 +47,21 @@ Route::group(['middleware' => 'auth:sanctum'], function() {
     Route::put('/pasien/{id}', [PasienController::class, 'update']);
     Route::delete('/pasien/{id}', [PasienController::class, 'destroy']);
 
-    Route::get('/sisa/pagi', [SisaPagiController::class, 'index']);
+    Route::get('/sisa/pagiU/{id_user}', [SisaPagiController::class, 'index']);
     Route::get('/sisa/pagi/{id}', [SisaPagiController::class, 'show']);
     Route::get('/sisa/pasienPagi/{id_pasien}', [SisaPagiController::class, 'showPagi']);
     Route::post('/sisa/pagi', [SisaPagiController::class, 'store']);
     Route::put('/sisa/pagi/{id}', [SisaPagiController::class, 'update']);
     Route::delete('/sisa/pagi/{id}', [SisaPagiController::class, 'destroy']);
 
-    Route::get('/sisa/siang', [SisaSiangController::class, 'index']);
+    Route::get('/sisa/siangU/{id_user}', [SisaSiangController::class, 'index']);
     Route::get('/sisa/siang/{id}', [SisaSiangController::class, 'show']);
     Route::get('/sisa/pasienSiang/{id_pasien}', [SisaSiangController::class, 'showSiang']);
     Route::post('/sisa/siang', [SisaSiangController::class, 'store']);
     Route::put('/sisa/siang/{id}', [SisaSiangController::class, 'update']);
     Route::delete('/sisa/siang/{id}', [SisaSiangController::class, 'destroy']);
 
-    Route::get('/sisa/malam', [SisaMalamController::class, 'index']);
+    Route::get('/sisa/malamU/{id_user}', [SisaMalamController::class, 'index']);
     Route::get('/sisa/malam/{id}', [SisaMalamController::class, 'show']);
     Route::get('/sisa/pasienMalam/{id_pasien}', [SisaMalamController::class, 'showMalam']);
     Route::post('/sisa/malam', [SisaMalamController::class, 'store']);

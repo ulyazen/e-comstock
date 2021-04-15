@@ -23,6 +23,7 @@ class CreateSisaMalamsTable extends Migration
             $table->tinyInteger('buah')->nullable();;
             $table->tinyInteger('snack')->nullable();;
             $table->timestamps();
+            $table->foreignId('id_user')->constrained('users');
         });
     }
 

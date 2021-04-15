@@ -19,6 +19,7 @@ class CreateBangsalsTable extends Migration
             $table->enum('siklus', ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11']);
             $table->date('tanggal');
             $table->timestamps();
+            $table->foreignId('id_user')->constrained('users');
         });
     }
 
