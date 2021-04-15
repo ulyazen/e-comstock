@@ -99,4 +99,19 @@ class UserController extends Controller
         ];
         return response()->json($respon, 200);
     }
+    public function destroy($id)
+    {
+        $user = User::findOrFail($id);
+        try {
+            $user->delete();
+            $response = [
+                'message' => 'user deleted',
+            ];
+            return response()->json($response, Response::HTTP_OK);
+        } catch (QueryException $e) {
+            return response()->json([
+                'message' => "Failed" . $e->errorInfo
+            ]);
+        }
+    }
 }
