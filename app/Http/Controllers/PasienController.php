@@ -137,7 +137,24 @@ class PasienController extends Controller
         ];
         return response()->json($response, Response::HTTP_OK);
     }
-
+    public function Lengkap($id_user)
+    {
+        $pasien = DB::table('sisa_pagis')
+            ->Join('pasiens', 'pasiens.id', '=', 'sisa_pagis.id_pasien')
+            ->Join('sisa_siangs', 'pasiens.id', '=', 'sisa_siangs.id_pasien')
+            ->Join('sisa_malams', 'pasiens.id', '=', 'sisa_malams.id_pasien')
+            ->Join('bangsals', 'bangsals.id', '=', 'pasiens.id_bangsal')
+            ->select(DB::raw('bangsals.siklus, pasiens.nama as nama_pasien, pasiens.no_rekam_medis, bangsals.nama as nama_bangsal, bangsals.tanggal, sisa_pagis.makanan_pokok as makanan_pokok_pagi, sisa_siangs.makanan_pokok as makanan_pokok_siang, sisa_malams.makanan_pokok as makanan_pokok_malam, sisa_pagis.lauk_hewani as lauk_hewani_pagi, sisa_siangs.lauk_hewani as lauk_hewani_siang, sisa_malams.lauk_hewani as lauk_hewani_malam, sisa_pagis.lauk_nabati as lauk_nabati_pagi, sisa_siangs.lauk_nabati as lauk_nabati_siang, sisa_malams.lauk_nabati as lauk_nabati_malam, sisa_pagis.sayur as sayur_pagi, sisa_siangs.sayur as sayur_siang, sisa_malams.sayur as sayur_malam, sisa_pagis.buah as buah_pagi, sisa_siangs.buah as buah_siang, sisa_malams.buah as buah_malam, sisa_pagis.snack as snack_pagi, sisa_siangs.snack as snack_siang, sisa_malams.snack as snack_malam'))
+            ->orderBy('bangsals.siklus', 'ASC')
+            ->where('bangsals.id_user', '=', $id_user)
+            ->get();
+        $response = [
+            'message' => 'lengkap',
+            'data' => $pasien
+        ];
+        return response()->json($response, Response::HTTP_OK);
+    }
+    
     public function avgSisaBangsal($id_bangsal)
     {
         $pasien = DB::table('sisa_pagis')

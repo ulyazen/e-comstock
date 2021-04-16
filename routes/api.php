@@ -40,6 +40,7 @@ Route::group(['middleware' => 'auth:sanctum'], function() {
     Route::get('/pasienAvgSisaUser/{id_user}', [PasienController::class, 'avgSisa']);
     Route::get('/pasienAvgSisaMakananUser/{id_user}', [PasienController::class, 'avgSisaMakanan']);
     Route::get('/pasienAvgLengkapUser/{id_user}', [PasienController::class, 'avgLengkap']);
+    Route::get('/pasienNilaiLengkapUser/{id_user}', [PasienController::class, 'Lengkap']);
     Route::get('/pasienAvgSisa/{id_bangsal}', [PasienController::class, 'avgSisaBangsal']);
     Route::get('/pasienAvgSisaMakanan/{id_bangsal}', [PasienController::class, 'avgSisaMakananBangsal']);
     Route::get('/pasienAvgLengkap/{id_bangsal}', [PasienController::class, 'avgLengkapBangsal']);
